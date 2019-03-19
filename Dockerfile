@@ -1,5 +1,7 @@
 FROM balenalib/raspberrypi3-alpine
 
+RUN [ "cross-build-start" ]
+
 ENV OTP_VERSION="21.3" \
     REBAR3_VERSION="3.9.0"
 
@@ -84,5 +86,7 @@ RUN set -xe \
 	&& cd /usr/local/src/elixir \
 	&& make install clean \
 	&& apk del .build-deps
+
+RUN [ "cross-build-end" ]
 
 CMD ["iex"]
